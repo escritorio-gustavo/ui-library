@@ -1,36 +1,27 @@
 <p>
-  <img width="100%" src="https://assets.solidjs.com/banner?type={{name_of_lib}}&background=tiles&project=%20" alt="{{name_of_lib}}">
+  <img width="100%" src="https://assets.solidjs.com/banner?type=shelf-ui&background=tiles&project=%20" alt="shelf-ui">
 </p>
 
-# {{name_of_lib}}
+# shelf-ui
 
 [![pnpm](https://img.shields.io/badge/maintained%20with-pnpm-cc00ff.svg?style=for-the-badge&logo=pnpm)](https://pnpm.io/)
 
-{{desc_of_lib}}
-
-> **Note** After using this template, you have to search and replace all `{{name_of_lib}}` and similar strings
-> with appropriate texts.
->
-> `{{name_of_lib}}` should be a **kebab-case** string representing the name of you monorepo.
->
-> `{{desc_of_lib}}` should be a **Normal case** string with the description of the repository.
->
-> `{{me}}` should be a **kebab-case** string from your profile URL.
+Small component library for SolidJS to help speed up the process of building UI's without worrying about styling
 
 ## Quick start
 
 Install it:
 
 ```bash
-npm i {{name_of_lib}}
+npm i shelf-ui
 # or
-yarn add {{name_of_lib}}
+yarn add shelf-ui
 # or
-pnpm add {{name_of_lib}}
+pnpm add shelf-ui
 ```
 
 Use it:
 
 ```tsx
-import {{name_of_lib}} from '{{name_of_lib}}'
+import shelf-ui from 'shelf-ui'
 ```
