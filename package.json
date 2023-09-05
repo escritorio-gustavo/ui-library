@@ -1,6 +1,6 @@
 {
   "name": "shelf-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Small component library for SolidJS to help speed up the process of building UI's without worrying about styling",
   "license": "MIT",
   "author": "escritorio_gustavo",
