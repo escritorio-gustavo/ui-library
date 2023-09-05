@@ -2,6 +2,11 @@ import { defineConfig } from 'vite'
 import solidPlugin from 'vite-plugin-solid'
 
 export default defineConfig({
+  css: {
+    postcss: {
+      plugins: [(await import('tailwindcss')).default],
+    },
+  },
   resolve: {
     alias: {
       src: '/src',
