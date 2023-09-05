@@ -1,3 +1,4 @@
+export * from './components'
 import { Accessor, Component, createComputed, createSignal } from 'solid-js'
 
 export function createHello(): [Accessor<string>, (to: string) => void] {

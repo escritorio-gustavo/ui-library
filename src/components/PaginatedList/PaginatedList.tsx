@@ -1,0 +1,95 @@
+import { FiChevronLeft, FiChevronRight, FiChevronsLeft, FiChevronsRight } from 'solid-icons/fi'
+import { Show, createSignal, splitProps, createEffect } from 'solid-js'
+import formatInt from '../../formatters/intFormatter'
+import { Button } from '../Button'
+import { Input } from '../Input'
+import { List } from '../List'
+
+type PaginatedListProps<T> = Parameters<typeof List<T>>[0] & {
+  pageSize: number
+}
+
+export function PaginatedList<T>(props: PaginatedListProps<T>) {
+  const [page, setPage] = createSignal(0)
+  const [local, rest] = splitProps(props, ['render', 'items', 'pageSize'])
+
+  const numberOfPages = () => Math.ceil(local.items.length / local.pageSize)
+
+  createEffect(() => {
+    if (page() >= numberOfPages()) {
+      setPage(Math.max(numberOfPages() - 1, 0))
+    }
+  })
+
+  return (
+    <>
+      <Show when={numberOfPages() > 1}>
+        <div class="flex items-center justify-center em:gap-2">
+          <Button variant={'flat'} disabled={page() === 0} onClick={() => setPage(0)}>
+            <FiChevronsLeft />
+          </Button>
+
+          <Button variant={'flat'} disabled={page() === 0} onClick={() => setPage(p => p - 1)}>
+            <FiChevronLeft />
+          </Button>
+
+          <div class="flex items-center gap-2">
+            Página
+            <Input
+              inputMode="numeric"
+              class="p-1 text-end [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+              type="number"
+              name=""
+              placeholder=""
+              min={1}
+              value={page() + 1}
+              max={numberOfPages()}
+              onChange={e => {
+                const value = Math.floor(e.target.valueAsNumber)
+
+                e.target.value = value.toString()
+
+                if (Number.isNaN(value) || value < 1) {
+                  e.target.value = '1'
+                  setPage(0)
+                  return
+                }
+
+                if (value >= numberOfPages()) {
+                  e.target.value = numberOfPages().toString()
+                  setPage(numberOfPages() - 1)
+                  return
+                }
+
+                setPage(e.target.valueAsNumber - 1)
+              }}
+            />
+            / {formatInt(Math.max(numberOfPages(), 1))}
+          </div>
+
+          <Button
+            variant={'flat'}
+            disabled={numberOfPages() === 0 || page() === numberOfPages() - 1}
+            onClick={() => setPage(p => p + 1)}
+          >
+            <FiChevronRight />
+          </Button>
+
+          <Button
+            variant={'flat'}
+            disabled={numberOfPages() === 0 || page() === numberOfPages() - 1}
+            onClick={() => setPage(numberOfPages() - 1)}
+          >
+            <FiChevronsRight />
+          </Button>
+        </div>
+      </Show>
+
+      <List
+        items={local.items.slice(local.pageSize * page(), local.pageSize * (page() + 1))}
+        render={local.render}
+        {...rest}
+      />
+    </>
+  )
+}
