@@ -25,3 +25,31 @@ Use it:
 ```tsx
 import shelf-ui from 'shelf-ui'
 ```
+
+```js
+// tailwind.config.js
+import plugin from 'tailwindcss/plugin'
+
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    './node_modules/shelf-ui/dist/**.*',
+    /* your paths here */
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [
+    plugin(({ addVariant }) => {
+      addVariant('em', ({ container }) => {
+        container.walkRules(rule => {
+          rule.selector = `.em\\:${rule.selector.slice(1)}`
+          rule.walkDecls(decl => {
+            decl.value = decl.value.replace('rem', 'em')
+          })
+        })
+      })
+    }),
+  ],
+}
+```
