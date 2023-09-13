@@ -2,6 +2,9 @@ import { cva } from 'class-variance-authority'
 import { JSX, splitProps } from 'solid-js'
 import { twMerge } from 'tailwind-merge'
 
+type Variant = 'primary' | 'danger' | 'success' | 'flat'
+type Size = 'small' | 'medium' | 'large'
+
 const classes = cva(
   [
     'select-none',
@@ -54,12 +57,12 @@ const classes = cva(
           'text-neutral-50',
         ],
         flat: ['bg-transparent disabled:brightness-50 enabled:hover:bg-neutral-50/10 em:px-2'],
-      },
+      } satisfies { [K in Variant]: string | string[] },
       size: {
         small: ['text-small shadow-sm'],
         medium: ['text-base shadow'],
         large: ['text-lg shadow-lg'],
-      },
+      } satisfies { [K in Size]: string | string[] },
     },
     defaultVariants: {
       variant: 'primary',
@@ -68,7 +71,7 @@ const classes = cva(
   },
 )
 
-type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & Parameters<typeof classes>[0]
+type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: Variant; size?: Size }
 
 export function Button(props: ButtonProps) {
   const [classNames, _] = splitProps(props, ['variant', 'size'])
