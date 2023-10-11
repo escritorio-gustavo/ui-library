@@ -24,7 +24,9 @@ export function PaginationControls(props: PaginationControlProps) {
   })
 
   return (
-    <div hidden={props.numberOfPages <= 1} class="flex items-center justify-center em:gap-2">
+    <div
+      class={`${props.numberOfPages > 1 ? 'flex' : 'hidden'} items-center justify-center em:gap-2`}
+    >
       <Button variant={'flat'} disabled={page() === 0} onClick={() => setPage(0)}>
         <FiChevronsLeft />
       </Button>
