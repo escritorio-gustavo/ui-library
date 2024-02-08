@@ -1,13 +1,13 @@
 import { For, JSX, splitProps } from 'solid-js'
 import { THead } from './THead'
-import { Column, ColumnDef } from './types'
+import type { Column, ColumnDef } from './types'
 
 type TableProps<T> = JSX.HTMLAttributes<HTMLTableElement> & {
   data: T[]
   columns: ColumnDef<T>[]
 }
 
-function flattenColumns<T>(columns: ColumnDef<T>[]): Column<T>[] {
+export function flattenColumns<T>(columns: ColumnDef<T>[]): Column<T>[] {
   const mapper = (column: ColumnDef<T>): Column<T>[] => {
     if ('columns' in column) {
       return column.columns.flatMap(mapper)

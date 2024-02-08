@@ -1,11 +1,12 @@
 import { JSX } from 'solid-js/jsx-runtime'
 import { ColumnDef } from '../Table'
 import { For, Show, createEffect, createSignal, splitProps } from 'solid-js'
-import { THead, flattenColumns } from '../Table/Table'
+import { THead } from '../Table/THead'
 import { Button } from '../Button'
 import { FiChevronLeft, FiChevronRight, FiChevronsLeft, FiChevronsRight } from 'solid-icons/fi'
 import { Input } from '../Input'
 import formatInt from '../../formatters/intFormatter'
+import { flattenColumns } from '../Table/Table'
 
 type TableProps<T> = JSX.HTMLAttributes<HTMLTableElement> & {
   data: T[]

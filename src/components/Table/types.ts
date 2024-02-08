@@ -6,7 +6,7 @@ type ColumnGroup<T> = {
   columns: ColumnDef<T>[]
 }
 
-type Column<T> = {
+export type Column<T> = {
   type: 'column'
   header: string
   accessor: (value: T) => unknown
