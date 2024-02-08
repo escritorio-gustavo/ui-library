@@ -1,1 +1,2 @@
-export { type ColumnDef, Table, createColumnHelper } from './Table'
+export { Table, createColumnHelper } from './Table'
+export { type ColumnDef } from './types.ts'

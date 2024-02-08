@@ -2,11 +2,13 @@ import { FiChevronLeft, FiChevronRight, FiChevronsLeft, FiChevronsRight } from '
 import { Button } from '../Button'
 import { Input } from '../Input'
 import { createEffect, createSignal } from 'solid-js'
-import formatInt from 'src/formatters/intFormatter'
+import formatInt from '../../formatters/intFormatter'
+import { twMerge } from 'tailwind-merge'
 
 type PaginationControlProps = {
   numberOfPages: number
   page?: number
+  class?: string
   onPageChange: (page: number) => void
 }
 
@@ -25,7 +27,7 @@ export function PaginationControls(props: PaginationControlProps) {
 
   return (
     <div
-      class={`${props.numberOfPages > 1 ? 'flex' : 'hidden'} items-center justify-center em:gap-2`}
+      class={twMerge(`${props.numberOfPages > 1 ? 'flex' : 'hidden'} items-center justify-center em:gap-2`, props.class)}
     >
       <Button variant={'flat'} disabled={page() === 0} onClick={() => setPage(0)}>
         <FiChevronsLeft />
