@@ -27,7 +27,10 @@ export function PaginationControls(props: PaginationControlProps) {
 
   return (
     <div
-      class={twMerge(`${props.numberOfPages > 1 ? 'flex' : 'hidden'} items-center justify-center em:gap-2`, props.class)}
+      class={twMerge(
+        `${props.numberOfPages > 1 ? 'flex' : 'hidden'} items-center justify-center em:gap-2`,
+        props.class,
+      )}
     >
       <Button variant={'flat'} disabled={page() === 0} onClick={() => setPage(0)}>
         <FiChevronsLeft />
